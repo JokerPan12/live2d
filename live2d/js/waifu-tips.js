@@ -25,9 +25,8 @@ function loadWidget(config) {
          <span class="fui-home" style="line-height: 20px;"><img src="/icons/comment_fill.svg"/></span>
          <span class="fui-chat" title="飞机大战" style="line-height: 20px;"><img src="/icons/game_fill.svg"/></span>
          <span class="fui-eye" title="变装" style="line-height: 20px;"><img src="/icons/attention_fill.svg"/></span>
-<!--         <span class="fui-user" title="换装" style="line-height: 20px;"><img src="/icons/like_fill.svg"/></span>-->
          <span class="fui-photo" title="拍照" style="line-height: 20px;"><img src="/icons/camera_add_fill.svg"/></span>
-         <span class="fui-info-circle" style="line-height: 20px;"><img src="/icons/explore_fill.svg"/></span>
+         <span class="fui-info-circle" title="更多" style="line-height: 20px;"><img src="/icons/explore_fill.svg"/></span>
          <span class="fui-cross" title="关闭看板娘" style="line-height: 20px;"><img src="/icons/round_close_fill.svg"/></span>
 			 </div>
 		</div>`);
