@@ -11,14 +11,14 @@
 
 2.  在你的网站首页文件index.html中插入以下代码 (ps:记得看准文件路径)
 
- _在头部<head>标签内引入样式_
+ `在头部<head>标签内引入样式`
 
 ```
 <link rel="stylesheet" href="/live2d/css/live2d.css" />
 <link rel="stylesheet" href="/live2d/css/waifu.css" />
 ```
 
- _在尾部<body>标签内引入js及初始化live2d_
+ `在尾部<body>标签内引入js及初始化live2d`
 ```
 <script type="text/javascript" src="live2d/js/jquery.min.js"></script>
 <script type="text/javascript" src="live2d/js/live2d.js"></script>
