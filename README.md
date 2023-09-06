@@ -11,7 +11,7 @@
 
 2.  在你的网站首页文件index.html中插入以下代码 (ps:记得看准文件路径)
 
- `在头部<head>标签内引入样式`
+ `在头部<head>标签内引入css样式`
 
 ```
 <link rel="stylesheet" href="/live2d/css/live2d.css" />
