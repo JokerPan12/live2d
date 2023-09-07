@@ -238,8 +238,10 @@ function loadWidget(config) {
       const target = randomSelection(modelList.models[modelId]);
       if (modelId < 9){
         loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
-      }else if(modelId >= 9 && modelId < modelList.models.length){
+      }else if(modelId >= 9 && modelId <= 45){
         loadlive2d("live2d", `${cdnPath}model/${target}`);
+      }else {
+        loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
       }
     } else {
       loadlive2d("live2d", `${apiPath}get/?id=${modelId}-${modelTexturesId}`);
