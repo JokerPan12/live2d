@@ -28,6 +28,7 @@ initWidget({
 	waifuPath: "/live2d/waifu.json",
 	cdnPath: "/live2d/"
 });
+</script>
 ```
 
 3. 两步就完成了，刷新你的页面，去看看效果吧啊(●ˇ∀ˇ●)
