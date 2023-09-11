@@ -236,17 +236,39 @@ function loadWidget(config) {
     if (useCDN) {
       if (!modelList) await loadModelList();
       const target = randomSelection(modelList.models[modelId]);
-      if (modelId < 9){
-        loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
-      }else if(modelId >= 9 && modelId <= 45){
-        loadlive2d("live2d", `${cdnPath}model/${target}`);
-      }else {
-        loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
-      }
+      checkFileExists(`${cdnPath}model/${target}/index.json`, (e) => {
+        if (e) {
+          loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
+        }else {
+          loadlive2d("live2d", `${cdnPath}model/${target}`);
+        }
+      })
+      // if (modelId < 9){
+      //   loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
+      // }else if(modelId >= 9 && modelId <= 45){
+      //   loadlive2d("live2d", `${cdnPath}model/${target}`);
+      // }else {
+      //   loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
+      // }
     } else {
       loadlive2d("live2d", `${apiPath}get/?id=${modelId}-${modelTexturesId}`);
       console.log(`Live2D 模型 ${modelId}-${modelTexturesId} 加载完成`);
     }
+  }
+
+  function checkFileExists(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          callback(true);
+        } else {
+          callback(false);
+        }
+      }
+    };
+    xhr.open('HEAD', url);
+    xhr.send();
   }
 
   async function loadRandModel() {
