@@ -177,7 +177,7 @@ function loadWidget(config) {
     let modelId = localStorage.getItem("modelId"),
       modelTexturesId = localStorage.getItem("modelTexturesId");
     if (modelId === null) {
-      modelId = 7; // 模型 ID
+      modelId = 0; // 模型 ID
       modelTexturesId = 53; // 材质 ID
     }
     loadModel(modelId, modelTexturesId);
@@ -236,20 +236,18 @@ function loadWidget(config) {
     if (useCDN) {
       if (!modelList) await loadModelList();
       const target = randomSelection(modelList.models[modelId]);
-      checkFileExists(`${cdnPath}model/${target}/index.json`, (e) => {
-        if (e) {
-          loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
-        }else {
-          loadlive2d("live2d", `${cdnPath}model/${target}`);
-        }
-      })
-      // if (modelId < 9){
-      //   loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
-      // }else if(modelId >= 9 && modelId <= 45){
-      //   loadlive2d("live2d", `${cdnPath}model/${target}`);
-      // }else {
-      //   loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
-      // }
+      // checkFileExists(`${cdnPath}model/${target}/index.json`, (e) => {
+      //   if (e) {
+      //     loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
+      //   }else {
+      //     loadlive2d("live2d", `${cdnPath}model/${target}`);
+      //   }
+      // })
+      if (modelId > 30){
+        loadlive2d("live2d", `${cdnPath}model/${target}`);
+      }else {
+        loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
+      }
     } else {
       loadlive2d("live2d", `${apiPath}get/?id=${modelId}-${modelTexturesId}`);
       console.log(`Live2D 模型 ${modelId}-${modelTexturesId} 加载完成`);
