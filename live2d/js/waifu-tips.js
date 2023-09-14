@@ -40,9 +40,9 @@ function loadWidget(config) {
   }
   // 检测用户活动状态，并在空闲时显示消息
   let userAction = false,
-    userActionTimer,
-    messageTimer,
-    messageArray = ["好久不见，日子过得好快呢……", "大坏蛋！你都多久没理人家了呀，嘤嘤嘤～", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口！", "这么久不想我吗(≧▽≦q)", "哥哥快来找我玩吖( •̀ ω •́ )"];
+      userActionTimer,
+      messageTimer,
+      messageArray = ["好久不见，日子过得好快呢……", "大坏蛋！你都多久没理人家了呀，嘤嘤嘤～", "嗨～快来逗我玩吧！", "拿小拳拳锤你胸口！", "这么久不想我吗(≧▽≦q)", "哥哥快来找我玩吖( •̀ ω •́ )"];
   window.addEventListener("mousemove", () => userAction = true);
   window.addEventListener("keydown", () => userAction = true);
   setInterval(() => {
@@ -131,7 +131,7 @@ function loadWidget(config) {
       else text = "你是夜猫子呀？这么晚还不睡觉，明天起的来嘛？";
     } else if (document.referrer !== "") {
       const referrer = new URL(document.referrer),
-        domain = referrer.hostname.split(".")[1];
+          domain = referrer.hostname.split(".")[1];
       if (location.hostname === referrer.hostname) text = `欢迎来到<span>「${document.title.split(" - ")[0]}」</span>`;
       else if (domain === "baidu") text = `Hello！来自 百度搜索 的朋友<br>你是搜索 <span>${referrer.search.split("&wd=")[1].split("&")[0]}</span> 找到的我吗？`;
       else if (domain === "so") text = `Hello！来自 360搜索 的朋友<br>你是搜索 <span>${referrer.search.split("&q=")[1].split("&")[0]}</span> 找到的我吗？`;
@@ -146,14 +146,14 @@ function loadWidget(config) {
   function showHitokoto() {
     // 增加 hitokoto.cn 的 API
     fetch("https://v1.hitokoto.cn")
-      .then(response => response.json())
-      .then(result => {
-        // const text = `这句一言来自 <span>「${result.from}」</span>，是 <span>${result.creator}</span> 在 hitokoto.cn 投稿的。`;
-        showMessage(result.hitokoto, 6000, 9);
-        // setTimeout(() => {
-        // 	showMessage(text, 4000, 9);
-        // }, 6000);
-      });
+        .then(response => response.json())
+        .then(result => {
+          // const text = `这句一言来自 <span>「${result.from}」</span>，是 <span>${result.creator}</span> 在 hitokoto.cn 投稿的。`;
+          showMessage(result.hitokoto, 6000, 9);
+          // setTimeout(() => {
+          // 	showMessage(text, 4000, 9);
+          // }, 6000);
+        });
   }
 
   function showMessage(text, timeout, priority) {
@@ -175,7 +175,7 @@ function loadWidget(config) {
 
   (function initModel() {
     let modelId = localStorage.getItem("modelId"),
-      modelTexturesId = localStorage.getItem("modelTexturesId");
+        modelTexturesId = localStorage.getItem("modelTexturesId");
     if (modelId === null) {
       modelId = 0; // 模型 ID
       modelTexturesId = 53; // 材质 ID
@@ -183,38 +183,38 @@ function loadWidget(config) {
     loadModel(modelId, modelTexturesId);
 
     fetch(waifuPath)
-      .then(response => response.json())
-      .then(result => {
-        window.addEventListener("mouseover", event => {
-          for (let { selector, text } of result.mouseover) {
-            if (!event.target.matches(selector)) continue;
-            text = randomSelection(text);
-            text = text.replace("{text}", event.target.innerText);
-            showMessage(text, 4000, 8);
-            return;
-          }
+        .then(response => response.json())
+        .then(result => {
+          window.addEventListener("mouseover", event => {
+            for (let { selector, text } of result.mouseover) {
+              if (!event.target.matches(selector)) continue;
+              text = randomSelection(text);
+              text = text.replace("{text}", event.target.innerText);
+              showMessage(text, 4000, 8);
+              return;
+            }
+          });
+          window.addEventListener("click", event => {
+            for (let { selector, text } of result.click) {
+              if (!event.target.matches(selector)) continue;
+              text = randomSelection(text);
+              text = text.replace("{text}", event.target.innerText);
+              showMessage(text, 4000, 8);
+              return;
+            }
+          });
+          result.seasons.forEach(({ date, text }) => {
+            const now = new Date(),
+                after = date.split("-")[0],
+                before = date.split("-")[1] || after;
+            if ((after.split("/")[0] <= now.getMonth() + 1 && now.getMonth() + 1 <= before.split("/")[0]) && (after.split("/")[1] <= now.getDate() && now.getDate() <= before.split("/")[1])) {
+              text = randomSelection(text);
+              text = text.replace("{year}", now.getFullYear());
+              //showMessage(text, 7000, true);
+              messageArray.push(text);
+            }
+          });
         });
-        window.addEventListener("click", event => {
-          for (let { selector, text } of result.click) {
-            if (!event.target.matches(selector)) continue;
-            text = randomSelection(text);
-            text = text.replace("{text}", event.target.innerText);
-            showMessage(text, 4000, 8);
-            return;
-          }
-        });
-        result.seasons.forEach(({ date, text }) => {
-          const now = new Date(),
-            after = date.split("-")[0],
-            before = date.split("-")[1] || after;
-          if ((after.split("/")[0] <= now.getMonth() + 1 && now.getMonth() + 1 <= before.split("/")[0]) && (after.split("/")[1] <= now.getDate() && now.getDate() <= before.split("/")[1])) {
-            text = randomSelection(text);
-            text = text.replace("{year}", now.getFullYear());
-            //showMessage(text, 7000, true);
-            messageArray.push(text);
-          }
-        });
-      });
   })();
 
   async function loadModelList() {
@@ -243,11 +243,7 @@ function loadWidget(config) {
       //     loadlive2d("live2d", `${cdnPath}model/${target}`);
       //   }
       // })
-      if (modelId > 30){
-        loadlive2d("live2d", `${cdnPath}model/${target}`);
-      }else {
-        loadlive2d("live2d", `${cdnPath}model/${target}/index.json`);
-      }
+      loadlive2d("live2d", `${cdnPath}model/${target}`);
     } else {
       loadlive2d("live2d", `${apiPath}get/?id=${modelId}-${modelTexturesId}`);
       console.log(`Live2D 模型 ${modelId}-${modelTexturesId} 加载完成`);
@@ -271,7 +267,7 @@ function loadWidget(config) {
 
   async function loadRandModel() {
     const modelId = localStorage.getItem("modelId"),
-      modelTexturesId = localStorage.getItem("modelTexturesId");
+        modelTexturesId = localStorage.getItem("modelTexturesId");
     if (useCDN) {
       if (!modelList) await loadModelList();
       const target = randomSelection(modelList.models[modelId]);
@@ -280,11 +276,11 @@ function loadWidget(config) {
     } else {
       // 可选 "rand"(随机), "switch"(顺序)
       fetch(`${apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`)
-        .then(response => response.json())
-        .then(result => {
-          if (result.textures.id === 1 && (modelTexturesId === 1 || modelTexturesId === 0)) showMessage("我还没有其他衣服呢！", 4000, 10);
-          else loadModel(modelId, result.textures.id, "我的新衣服好看嘛？");
-        });
+          .then(response => response.json())
+          .then(result => {
+            if (result.textures.id === 1 && (modelTexturesId === 1 || modelTexturesId === 0)) showMessage("我还没有其他衣服呢！", 4000, 10);
+            else loadModel(modelId, result.textures.id, "我的新衣服好看嘛？");
+          });
     }
   }
 
@@ -299,10 +295,10 @@ function loadWidget(config) {
       loadModel(index, 0, modelList.messages[index]);
     } else {
       fetch(`${apiPath}switch/?id=${modelId}`)
-        .then(response => response.json())
-        .then(result => {
-          loadModel(result.model.id, 0, result.model.message);
-        });
+          .then(response => response.json())
+          .then(result => {
+            loadModel(result.model.id, 0, result.model.message);
+          });
     }
   }
 }
