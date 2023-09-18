@@ -82,7 +82,7 @@ initWidget({
             ]).then(() => {
                 initWidget({
                     waifuPath: live2d_path + "waifu.json",
-                    cdnPath: live2d_path + "/"
+                    cdnPath: live2d_path
                 });
             });
         }
@@ -119,5 +119,9 @@ initWidget({
 #### 功能介绍
 
 看板娘上的按钮功能包括聊天、飞机大战、变装、拍照、更多、关闭。。。等等
+
+效果演示：
+
+![效果演示](images/demonstrate.mp4)
 
 `持续更新模型中...`
