@@ -120,6 +120,6 @@ initWidget({
 
 看板娘上的按钮功能包括聊天、飞机大战、变装、拍照、更多、关闭。。。等等
 
-[![效果演示](https://img.devbox.cn/3cccf/16086/243/7a4ce818aebe26ff.png)](https://jokerpan-bucket.oss-cn-guangzhou.aliyuncs.com/movies/demonstrate.mp4)
+[![效果演示](https://jokerpan-bucket.oss-cn-guangzhou.aliyuncs.com/movies/demonstrate.mp4)]
 
 `持续更新模型中...`
